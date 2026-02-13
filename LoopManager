@@ -1,0 +1,58 @@
+-- LoopManager
+-- usage
+-- function C:Anyting(v)
+--     if v then self:StartLoop(0.1, function() print("YOOO") end)
+--     else self:StopLoop() end
+-- end
+local C = getgenv().Cardinal
+if type(C) ~= "table" then
+	C = {}
+	getgenv().Cardinal = C
+end
+
+C._loops = C._loops or {}
+
+local function _autoKey()
+	local name = debug.info(3, "n")
+	return (name and name ~= "") and name or tostring(debug.info(3, "f"))
+end
+
+function C:StartLoop(interval, fn)
+	local key = _autoKey()
+	interval = interval or 0
+
+	local loop = self._loops[key]
+
+	if loop and loop.running then
+		loop.interval = interval
+		loop.fn = fn
+		return
+	end
+
+	loop = { running = true, interval = interval, fn = fn }
+	self._loops[key] = loop
+
+	loop.thread = task.spawn(function()
+		while loop.running do
+			local f = loop.fn
+			if f then
+				local ok, err = pcall(f)
+				if not ok then
+					warn(("Loop error [%s]: %s"):format(tostring(key), tostring(err)))
+				end
+			end
+			task.wait(loop.interval)
+		end
+		self._loops[key] = nil
+	end)
+end
+
+function C:StopLoop()
+	local key = _autoKey()
+	local loop = self._loops[key]
+	if loop then
+		loop.running = false
+	end
+end
+
+return C

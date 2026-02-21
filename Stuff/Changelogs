@@ -1,14 +1,5 @@
 local Data = {}
 
-local function GetTime()
-    local h = os.date("%H")
-    return h < 5 and "Good Night"
-        or h < 12 and "Good Morning"
-        or h < 18 and "Good Afternoon"
-        or h < 23 and "Good Evening"
-        or "Good Night"
-end
-
 Data.Build = "1.0"
 
 Data.SupportedGames = {
@@ -16,12 +7,17 @@ Data.SupportedGames = {
         Game = "Grand of Piece",
         Status = "Live",
         Date = "2026-00-00"
+    },
+    {
+        Game = "A Universal Time",
+        Status = "Live",
+        Date = "2026-00-00"
     }
 }
 
 Data.Changelogs = {
     {
-        Title = GetTime() .. " - Welcome to Cardinal",
+        Title = "GPO",
         Date = "N/A",
 
         Changes = {
@@ -30,7 +26,18 @@ Data.Changelogs = {
         },
 
         Note = "Nothing"
-    }
+    },
+    {
+        Title = "AUT",
+        Date = "N/A",
+
+        Changes = {
+            "• Initial release",
+            "• Beginning of our journey"
+        },
+
+        Note = "Nothing"
+    },
 }
 
 return Data

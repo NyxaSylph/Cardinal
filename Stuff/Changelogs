@@ -4,32 +4,16 @@ Data.Build = "1.0"
 
 Data.SupportedGames = {
     {
-        Game = "Grand of Piece",
+        Game = "Bizzare Lineage",
         Status = "Live",
-        Date = "2026-00-00"
+        Date = "03-02-2026"
     },
-    {
-        Game = "A Universal Time",
-        Status = "Live",
-        Date = "2026-00-00"
-    }
 }
 
 Data.Changelogs = {
     {
-        Title = "GPO",
-        Date = "N/A",
-
-        Changes = {
-            "• Initial release",
-            "• Beginning of our journey"
-        },
-
-        Note = "Nothing"
-    },
-    {
-        Title = "AUT",
-        Date = "N/A",
+        Title = "Bizzare Lineage",
+        Date = "03/02",
 
         Changes = {
             "• Initial release",
